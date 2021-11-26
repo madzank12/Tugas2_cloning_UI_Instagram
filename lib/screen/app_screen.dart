@@ -1,18 +1,16 @@
-import 'dart:ui';
+// ini blm diperlukan
+// import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_application_1/constants.dart';
 
-class AppScreen extends StatefulWidget {
-  const AppScreen({Key? key}) : super(key: key);
-
-  @override
-  _AppScreenState createState() => _AppScreenState();
-}
-
-class _AppScreenState extends State<AppScreen> {
-  List<Map<String, String>> listPosts = [
+// sepertinya pakai stateless saja bang
+class AppScreen extends StatelessWidget {
+  // disarankan flutter pakai key
+  AppScreen({Key? key}) : super(key: key);
+  // karena stateless, pasang final
+  final List<Map<String, String>> listPosts = [
     {
       'image': 'assets/images/post-1.jpg',
     },
@@ -50,6 +48,7 @@ class _AppScreenState extends State<AppScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // sudah bagus buat secara custom di body, sebenernya memanfaatkan appbar bisa juga bang
             // topbar
             SizedBox(
               height: 60,
@@ -90,6 +89,7 @@ class _AppScreenState extends State<AppScreen> {
                 ),
               ),
             ),
+            //kalau pakai appbar, buat kasih pembatan bisa manfaatin elevation pada appbarnya
             const Divider(height: 1),
             Expanded(
               child: SingleChildScrollView(
@@ -427,10 +427,10 @@ class _AppScreenState extends State<AppScreen> {
                     ),
                     // grid post
                     GridView.builder(
+                      // well done grid view di dalam scroll view biar menyatu gak ke scroll
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
                         childAspectRatio: 1 / 1,
                         crossAxisSpacing: 2,
@@ -456,6 +456,7 @@ class _AppScreenState extends State<AppScreen> {
           ],
         ),
       ),
+      // well done -> ngulik tentang bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {},
         backgroundColor: white,
@@ -535,7 +536,10 @@ class ProfileButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 20,
+        //tambah padding biar keliatan gak mepet bgt
+        padding: const EdgeInsets.symmetric(vertical: 7),
+        // gaperlu di hardcode seperti ini untuk tinggi, karena beda device beda ukuran
+        // height: 20,
         decoration: buttonDecoration,
         child: Center(
           child: Text(
